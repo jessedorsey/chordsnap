@@ -1,0 +1,243 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #7c889c 100%);
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+    padding: .5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.options {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 3px solid #ccc;
+    padding-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.main-window {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.chord-list {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: .5rem;
+    font-size: .8rem;
+    overflow-y: auto;
+    width: 48%;
+    transition: opacity 0.3s ease;
+    opacity: 0.7;
+}
+
+#chord-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.chord-list:hover {
+    opacity: 1;
+}
+
+.chord-list h2 {
+    margin-top: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ccc;
+}
+
+.chord-category {
+    flex: 0 1 170px;
+}
+
+
+.chord-category div {
+    border-right: 1px solid #ccc;
+}
+
+.chord-category h3 {
+    border-bottom: 1px solid #ccc;
+    color: #2d3436;
+    margin: 0;
+}
+
+.chord-item {
+    transition: background-color 0.2s;
+    cursor: help;
+    padding: .2rem 0;
+}
+
+.chord-item:first-child {
+    border-top: 1px solid #ccc;
+}
+
+.chord-item:hover {
+    background-color: #f5f7fa;
+}
+
+.chord-item.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.chord-progression {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: .5rem;
+    font-size: .8rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+    width: 15%;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    text-align: center;
+    border-radius: 12px;
+}
+
+#chord-display {
+    font-size: 4rem;
+    margin: 1rem 0;
+    min-height: 5rem;
+    color: #2d3436;
+}
+
+#status {
+    color: #636e72;
+    margin-bottom: 1rem;
+}
+
+.notes {
+    font-size: 1.2rem;
+    color: #636e72;
+    margin-top: 1rem;
+}
+
+.github-link {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    color: #2d3436;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-link:hover {
+    text-decoration: underline;
+}
+
+.no-midi {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    color: #856404;
+}
+
+.show {
+    display: block;
+}
+
+.piano-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    position: relative;
+}
+
+.piano {
+    position: relative;
+    height: 120px;
+    display: inline-flex;
+    margin: 0 auto;
+    min-width: max-content;
+}
+
+.white-key {
+    width: 40px;
+    height: 120px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.black-key {
+    width: 24px;
+    height: 80px;
+    background: #333;
+    position: absolute;
+    z-index: 2;
+    border-radius: 0 0 4px 4px;
+}
+
+.key.active {
+    background: #e3f2fd;
+}
+
+.black-key.active {
+    background: #666;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .main-window {
+        flex-direction: column;
+    }
+
+    .chord-list {
+        width: 100%;
+        max-height: 300px;
+    }
+}
