@@ -1,4 +1,4 @@
-# MIDI Chord Detector
+# Chord Teacher
 
 A web-based MIDI chord detector that identifies chords from MIDI input in real-time. Built with TypeScript and the Web MIDI API.
 
@@ -12,7 +12,7 @@ A web-based MIDI chord detector that identifies chords from MIDI input in real-t
 
 ## Try It Out
 
-Visit the live demo: https://YOUR_USERNAME.github.io/YOUR_REPO/
+Visit the live demo: https://jessedorsey.github.io/chordteach/
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Visit the live demo: https://YOUR_USERNAME.github.io/YOUR_REPO/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+   git clone https://github.com/jessedorsey/chordteach.git
    cd YOUR_REPO
    ```
 
@@ -71,5 +71,3 @@ The project is set up to deploy to GitHub Pages from the `docs` folder. To deplo
 ## License
 
 MIT
-# priv_chordteach
-# priv_chordteach
