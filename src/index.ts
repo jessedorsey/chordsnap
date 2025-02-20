@@ -1,6 +1,7 @@
 import { CHORDS, ChordPattern } from './chords';
 import { initializeChordList, updateChordList, formatChordName, updateRootNote } from './chordList';
 import { initializeOptions, Options } from './options';
+import { analyzeChordInKey } from './romanNumerals';
 
 // Types
 type MIDINote = number;
@@ -20,6 +21,7 @@ const NUM_OCTAVES = 3;
 // State
 const activeNotes: Set<MIDINote> = new Set();
 const pianoKeys: PianoKey[] = [];
+let currentKey: string = 'C'; // Default to C major
 
 // Piano setup
 function createPiano(): void {
@@ -113,8 +115,8 @@ function findBassNote(notes: Set<MIDINote>): MIDINote {
 }
 
 // Detect chord from intervals
-function detectChord(notes: Set<MIDINote>): ChordName {
-    if (notes.size < 2) return null;
+function detectChord(notes: Set<MIDINote>): { name: ChordName, romanNumeral: string | null } {
+    if (notes.size < 2) return { name: null, romanNumeral: null };
     
     const intervals: number[] = getIntervals(notes);
     const bassNote: NoteName = NOTES[findBassNote(notes) % 12];
@@ -129,10 +131,14 @@ function detectChord(notes: Set<MIDINote>): ChordName {
                     if (matches) {
                         // If the bass note is not the root note, it's an inversion
                         const rootNote: NoteName = NOTES[(findBassNote(notes) - rotation[0] + 12) % 12];
-                        if (rootNote !== bassNote) {
-                            return `${rootNote}${type}/${bassNote}`;
-                        }
-                        return `${rootNote}${type}`;
+                        const chordName = rootNote !== bassNote ? 
+                            `${rootNote}${type}/${bassNote}` : 
+                            `${rootNote}${type}`;
+                            
+                        // Get Roman numeral analysis (assuming C major for now - you can make this configurable)
+                        const romanNumeral = analyzeChordInKey(rootNote, type, currentKey);
+                        
+                        return { name: chordName, romanNumeral };
                     }
                 }
             }
@@ -162,23 +168,25 @@ function detectChord(notes: Set<MIDINote>): ChordName {
             }
             
             if (extensions.length > 0) {
-                return `${bassNote}${chordQuality}(${extensions.join(',')})`;
+                return { name: `${bassNote}${chordQuality}(${extensions.join(',')})`, romanNumeral: null };
             }
             
             // If it's just a triad, return the simple form
-            return `${bassNote}${chordQuality}`;
+            return { name: `${bassNote}${chordQuality}`, romanNumeral: null };
         }
     }
     
-    return 'Unknown';
+    return { name: 'Unknown', romanNumeral: null };
 }
 
 // Update the display
 function updateDisplay(): void {
-    const chord: ChordName = detectChord(activeNotes);
+    const { name: chord, romanNumeral } = detectChord(activeNotes);
     const chordDisplay = document.getElementById('chord-display');
     if (chordDisplay) {
-        chordDisplay.textContent = chord || '-';
+        const displayText = chord || '-';
+        const romanText = romanNumeral ? ` (${romanNumeral})` : '';
+        chordDisplay.textContent = displayText + romanText;
     }
     
     const noteNames: string = Array.from(activeNotes)
