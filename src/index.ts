@@ -1,6 +1,7 @@
 import { CHORDS, ChordPattern } from './chords';
 import { initializeChordList, updateChordList, formatChordName, updateRootNote } from './chordList';
 import { initializeOptions, Options } from './options';
+import { createPiano, updatePianoKeys } from './piano';
 
 // Types
 type MIDINote = number;
@@ -21,41 +22,7 @@ const NUM_OCTAVES = 3;
 const activeNotes: Set<MIDINote> = new Set();
 const pianoKeys: PianoKey[] = [];
 
-// Piano setup
-function createPiano(): void {
-    const piano = document.getElementById('piano');
-    if (!piano) return;
 
-    for (let octave = START_OCTAVE; octave < START_OCTAVE + NUM_OCTAVES; octave++) {
-        for (let i = 0; i < 12; i++) {
-            const note = octave * 12 + i;
-            const isBlack = NOTES[i].includes('#');
-            
-            const key = document.createElement('div');
-            key.className = isBlack ? 'black-key key' : 'white-key key';
-            key.dataset.note = note.toString();
-            
-            if (isBlack) {
-                key.style.left = `${(i - 0.5) * 40 + (octave - START_OCTAVE) * 40 * 7}px`;
-            } else {
-                piano.appendChild(key);
-            }
-            
-            pianoKeys.push({ element: key, note });
-        }
-        
-        // Add black keys after white keys to ensure proper z-index
-        for (let i = 0; i < 12; i++) {
-            const note = octave * 12 + i;
-            const isBlack = NOTES[i].includes('#');
-            
-            if (isBlack) {
-                const key = pianoKeys.find(k => k.note === note)?.element;
-                if (key) piano.appendChild(key);
-            }
-        }
-    }
-}
 
 // Update piano visualization
 function updatePianoKeys(): void {
