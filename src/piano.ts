@@ -1,6 +1,48 @@
+/**
+ * ScreenPiano
+ * 
+ * Just a simple piano display. Eventually we will make it playable with a traditional keyboard.
+ * 
+ * @version 1.0
+ * @since 2025-03-24
+ */
+
+
+
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const START_OCTAVE = 0;
 const END_OCTAVE = 8;
+
+interface PianoKey {
+    [note: string]: {
+        element: HTMLElement;
+        note: number;
+        isBlack: boolean;
+    }
+}
+
+
+class ScreenPiano {
+    private piano: HTMLElement;
+    private keys: PianoKey;
+    // private keyCount: number;
+
+    constructor() {
+        this.piano = document.getElementById('piano') as HTMLElement;
+        this.keys = {};
+    }
+
+    private createPiano() {
+        this.piano.innerHTML = '';
+
+        for (let octave = START_OCTAVE; octave <= END_OCTAVE; octave++) {
+            for (let noteIndex = 0; noteIndex < NOTES.length; noteIndex++) {
+                
+            }
+        }
+    }
+}
+
 
 export function createPiano() {
     const piano = document.getElementById('piano');

@@ -1,7 +1,7 @@
 import { CHORDS, ChordPattern } from './chords';
 import { initializeChordList, updateChordList, formatChordName, updateRootNote } from './chordList';
 import { initializeOptions, Options } from './options';
-import { createPiano, updatePianoKeys } from './piano';
+import { createPiano } from './piano';
 
 // Types
 type MIDINote = number;
@@ -162,7 +162,7 @@ function updateDisplay(): void {
         updateRootNote(NOTES[bassNote % 12]);
     }
 
-    updatePianoKeys();
+    // updatePianoKeys();
     updateChordList(chord);
 }
 
