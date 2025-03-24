@@ -6,7 +6,7 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "outDir": "./docs",
+        "outDir": "./dist",
         "moduleResolution": "node",
         "lib": ["ES2020", "DOM", "DOM.Iterable"]
     },
