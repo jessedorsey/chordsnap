@@ -7,8 +7,6 @@
  * @since 2025-03-24
  */
 
-
-
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const START_OCTAVE = 0;
 const END_OCTAVE = 8;
@@ -21,6 +19,9 @@ interface PianoKey {
     }
 }
 
+// Add these at the top level
+const audioContext = new AudioContext();
+const activeOscillators: Map<number, OscillatorNode> = new Map();
 
 class ScreenPiano {
     private piano: HTMLElement;
@@ -42,7 +43,6 @@ class ScreenPiano {
         }
     }
 }
-
 
 export function createPiano() {
     const piano = document.getElementById('piano');
@@ -129,4 +129,43 @@ function getNoteNameFromMidi(midiNote: number): string | null {
     const noteName = NOTES[midiNote % 12];
     const octave = Math.floor(midiNote / 12) - 1;
     return `${noteName}${octave}`;
-} 
+}
+
+// Add this function to create and play a note
+function playNote(midiNote: number): void {
+    const frequency = 440 * Math.pow(2, (midiNote - 69) / 12);
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+    
+    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+    gainNode.gain.setTargetAtTime(0, audioContext.currentTime + 0.1, 0.015);
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.start();
+    activeOscillators.set(midiNote, oscillator);
+    
+    // Stop and remove oscillator after decay
+    setTimeout(() => {
+        oscillator.stop();
+        oscillator.disconnect();
+        activeOscillators.delete(midiNote);
+    }, 1000);
+}
+
+// Add this function to stop a note
+function stopNote(midiNote: number): void {
+    const oscillator = activeOscillators.get(midiNote);
+    if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+        activeOscillators.delete(midiNote);
+    }
+}
+
+// Export these functions
+export { playNote, stopNote }; 

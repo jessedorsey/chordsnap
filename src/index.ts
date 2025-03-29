@@ -1,7 +1,7 @@
 import { CHORDS, ChordPattern } from './chords';
 import { initializeChordList, updateChordList, formatChordName, updateRootNote } from './chordList';
 import { initializeOptions, Options } from './options';
-import { createPiano } from './piano';
+import { createPiano, playNote, stopNote } from './piano';
 
 // Types
 type MIDINote = number;
@@ -183,11 +183,13 @@ function initializeMIDI(): void {
                     // Note on with velocity > 0
                     if (command === 144 && velocity > 0) {
                         activeNotes.add(note);
+                        playNote(note);
                         updateDisplay();
                     }
                     // Note off or note on with velocity 0
                     else if (command === 128 || (command === 144 && velocity === 0)) {
                         activeNotes.delete(note);
+                        stopNote(note);
                         updateDisplay();
                     }
                 };
