@@ -12,7 +12,7 @@ A web-based MIDI chord detector that identifies chords from MIDI input in real-t
 
 ## Try It Out
 
-Visit the live demo: https://jessedorsey.github.io/chordteach/
+Visit the live demo: https://jessedorsey.github.io/chordsnap/
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Visit the live demo: https://jessedorsey.github.io/chordteach/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/jessedorsey/chordteach.git
+   git clone https://github.com/jessedorsey/chordsnap.git
    cd YOUR_REPO
    ```
 
