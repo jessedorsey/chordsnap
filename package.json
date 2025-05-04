@@ -1,5 +1,5 @@
 {
-  "name": "chordteach",
+  "name": "chordsnap",
   "version": "1.0.0",
   "description": "A web-based MIDI chord detector",
   "type": "module",

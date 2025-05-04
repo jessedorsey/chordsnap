@@ -44,7 +44,7 @@ Visit the live demo: https://jessedorsey.github.io/chordteach/
 
 ## Deployment
 
-The project is set up to deploy to GitHub Pages from the `docs` folder. To deploy:
+The project is set up to deploy to GitHub Pages from the `dist` folder. To deploy:
 
 1. Update the GitHub repository URL in both `index.html` and `docs/index.html`
 2. Run the deploy script:
@@ -56,7 +56,7 @@ The project is set up to deploy to GitHub Pages from the `docs` folder. To deplo
 3. Go to your repository settings on GitHub:
    - Navigate to "Settings" > "Pages"
    - Set the source to "Deploy from a branch"
-   - Select the "main" branch and "/docs" folder
+   - Select the "main" branch and "/dist" folder
    - Click "Save"
 
 ## Supported Chord Types

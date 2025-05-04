@@ -3,6 +3,7 @@ export interface Options {
     showPiano: boolean;
     showProgression: boolean;
     showRootNote: boolean;
+    enableSound: boolean;
 }
 
 export const defaultOptions: Options = {
@@ -10,6 +11,7 @@ export const defaultOptions: Options = {
     showPiano: true,
     showProgression: true,
     showRootNote: true,
+    enableSound: true,
 };
 
 export function initializeOptions() {

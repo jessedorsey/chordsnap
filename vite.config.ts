@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/chordteach/',
+  base: '/chordsnap/',
   build: {
     outDir: 'dist',
     sourcemap: true,
